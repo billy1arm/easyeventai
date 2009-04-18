@@ -5,6 +5,7 @@
 <?php
 /* Script by Kirix for YTDB
 Скрипт by KiriX, специально для YTDB */
+error_reporting(2039);
 $host			= 'localhost'; // host
 $user			= 'root';
 $password		= '';
