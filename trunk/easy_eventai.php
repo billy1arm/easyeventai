@@ -9,12 +9,12 @@ $host			= 'localhost'; // host
 $user			= 'root';
 $password		= '';
 $database		= ''; // your database
-$ai_text_loc			= '8'; // locale. Defaul: 8 (Russian locale)
+$ai_text_loc			= '8'; // locale. Default: 8 (Russian locale)
 $version		= '0.1.4'; // script version
 
 include ("lang.php");
 include_once ("DbSimple/Generic.php");
-$dDB = DbSimple_Generic::connect("mysql://root:13589436@127.0.0.1/ytdb-w");
+$dDB = DbSimple_Generic::connect('mysql://'.$user.':'.$password.'@'.$host.'/'.$database);
 mysql_query('SET NAMES utf8;');
 
 // запоминаем данные если они уже были введены
@@ -1188,7 +1188,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<tr><td>Комментарий:</td><td><input name="comment" type="text" value="<?php echo $comment; ?>"></td>
-			<tr><td></td><td><button value="1" name="done" type="submit">Готово!</button><button value="1" name="write" type="submit">Записать в файл</button></td>
+			<tr><td>&nbsp;</td><td><button value="1" name="done" type="submit">Готово!</button><button value="1" name="write" type="submit">Записать в файл</button></td>
 		</table>
 	</form>
 </body>
