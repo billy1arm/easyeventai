@@ -11,60 +11,73 @@ $user			= 'root';
 $password		= '';
 $database		= ''; // your database
 $ai_text_loc	= '8'; // locale. Default: 8 (Russian locale)
-$version		= '0.1.6'; // script version
+$version		= '0.1.7'; // script version
 
 include_once ("DbSimple/Generic.php");
 $dDB = DbSimple_Generic::connect('mysql://'.$user.':'.$password.'@'.$host.'/'.$database);
 mysql_query('SET NAMES utf8;');
 
 // запоминаем данные если они уже были введены
-$id		= @$_REQUEST['id'];
-$creature_id		= @$_REQUEST['creature_id'];
+$id								= @$_REQUEST['id'];
+if ($id == '')
+$id								= 0;
+$creature_id					= @$_REQUEST['creature_id'];
+if ($creature_id == '')
+$creature_id					= 0;
 $event_inverse_phase_mask		= @$_REQUEST['event_inverse_phase_mask'];
 if ($event_inverse_phase_mask == '') $event_inverse_phase_mask = '0';
-$event_chance		= @$_REQUEST['event_chance'];
+$event_chance					= @$_REQUEST['event_chance'];
 if ($event_chance == '') $event_chance = '100';
-$event_flags		= @$_REQUEST['event_flags1']+@$_REQUEST['event_flags2']+@$_REQUEST['event_flags3']+@$_REQUEST['event_flags4'];
+$event_flags					= @$_REQUEST['event_flags1']+@$_REQUEST['event_flags2']+@$_REQUEST['event_flags3']+@$_REQUEST['event_flags4'];
 if ($event_flags == '') $event_flags = '0';
-$event_param1		= @$_REQUEST['event_param1'];
+$event_param1					= @$_REQUEST['event_param1'];
 if ($event_param1 == '') $event_param1 = '0';
-$event_param2		= @$_REQUEST['event_param2'];
+$event_param2					= @$_REQUEST['event_param2'];
 if ($event_param2 == '') $event_param2 = '0';
-$event_param3		= @$_REQUEST['event_param3'];
+$event_param3					= @$_REQUEST['event_param3'];
 if ($event_param3 == '') $event_param3 = '0';
-$event_param4		= @$_REQUEST['event_param4'];
+$event_param4					= @$_REQUEST['event_param4'];
 if ($event_param4 == '') $event_param4 = '0';
-$action1_param1		= @$_REQUEST['action1_param1'];
+$action1_param1					= @$_REQUEST['action1_param1'];
 if ($action1_param1 == '') $action1_param1 = '0';
-$action1_param2		= @$_REQUEST['action1_param2'];
+$action1_param2					= @$_REQUEST['action1_param2'];
 if ($action1_param2 == '') $action1_param2 = '0';
 if ($action1_type == 11)
-$action1_param3		= @$_REQUEST['cast1_flags1']+@$_REQUEST['cast1_flags2']+@$_REQUEST['cast1_flags3']+@$_REQUEST['cast1_flags4']+@$_REQUEST['cast1_flags5']+@$_REQUEST['cast1_flags6'];
+$action1_param3					= @$_REQUEST['cast1_flags1']+@$_REQUEST['cast1_flags2']+@$_REQUEST['cast1_flags3']+@$_REQUEST['cast1_flags4']+@$_REQUEST['cast1_flags5']+@$_REQUEST['cast1_flags6'];
 else
-$action1_param3		= @$_REQUEST['action1_param3'];
+$action1_param3					= @$_REQUEST['action1_param3'];
 if ($action1_param3 == '') $action1_param3 = '0';
-$action2_param1		= @$_REQUEST['action2_param1'];
+$action2_param1					= @$_REQUEST['action2_param1'];
 if ($action2_param1 == '') $action2_param1 = '0';
-$action2_param2		= @$_REQUEST['action2_param2'];
+$action2_param2					= @$_REQUEST['action2_param2'];
 if ($action2_param2 == '') $action2_param2 = '0';
 if ($action2_type == 11)
-$action2_param3		= @$_REQUEST['cast2_flags1']+@$_REQUEST['cast2_flags2']+@$_REQUEST['cast2_flags3']+@$_REQUEST['cast2_flags4']+@$_REQUEST['cast2_flags5']+@$_REQUEST['cast2_flags6'];
+$action2_param3					= @$_REQUEST['cast2_flags1']+@$_REQUEST['cast2_flags2']+@$_REQUEST['cast2_flags3']+@$_REQUEST['cast2_flags4']+@$_REQUEST['cast2_flags5']+@$_REQUEST['cast2_flags6'];
 else
-$action2_param3		= @$_REQUEST['action2_param3'];
+$action2_param3					= @$_REQUEST['action2_param3'];
 if ($action2_param3 == '') $action2_param3 = '0';
-$action3_param1		= @$_REQUEST['action3_param1'];
+$action3_param1					= @$_REQUEST['action3_param1'];
 if ($action3_param1 == '') $action3_param1 = '0';
-$action3_param2		= @$_REQUEST['action3_param2'];
+$action3_param2					= @$_REQUEST['action3_param2'];
 if ($action3_param2 == '') $action3_param2 = '0';
 if ($action3_type == 11)
-$action3_param3		= @$_REQUEST['cast3_flags1']+@$_REQUEST['cast3_flags2']+@$_REQUEST['cast3_flags3']+@$_REQUEST['cast3_flags4']+@$_REQUEST['cast3_flags5']+@$_REQUEST['cast3_flags6'];
+$action3_param3					= @$_REQUEST['cast3_flags1']+@$_REQUEST['cast3_flags2']+@$_REQUEST['cast3_flags3']+@$_REQUEST['cast3_flags4']+@$_REQUEST['cast3_flags5']+@$_REQUEST['cast3_flags6'];
 else
-$action3_param3		= @$_REQUEST['action3_param3'];
+$action3_param3					= @$_REQUEST['action3_param3'];
 if ($action3_param3 == '') $action3_param3 = '0';
-$action2_param3		= $action2_param3;
+$action2_param3					= $action2_param3;
 
 // заполняем данные, если используется поиск
-if ($search==1)
+if ($search==2)
+{
+$id = $dDB-> selectCell("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
+}
+if ($searchnpc==1)
+{
+$creature_id = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$creature_id."'");
+$id = $dDB-> selectCell("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
+}
+if ($search==1 || ($search==2 && $id!=0) || ($searchnpc==1 && $id !=0))
 {
 $script = $dDB-> selectRow("SELECT * FROM `creature_ai_scripts` WHERE `id` = ".$id."");
 $creature_id 				= $script[creature_id];
@@ -93,10 +106,6 @@ $comment					= $script[comment];
 }
 // Поиск
 // Поиск NPC
-if ($searchnpc==1)
-{
-$creature_id = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$creature_id."'");
-}
 if ($searchnpc==2)
 {
 $event_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$event_param1."'");
@@ -136,7 +145,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 	<form name="npc" method="post">
 	Заполните поля:
 		<table border="1">
-			<tr><td><?php echo "Номер скрипта"; ?>:</td><td><input name="id" type="text" value="<?php echo $id; ?>"> <button value="1" name="search" type="submit">Поиск в базе</button></td>
+			<tr><td><?php echo "Номер скрипта"; ?>:</td><td><input name="id" type="text" value="<?php echo $id; ?>"> <button value="1" name="search" type="submit">Поиск в базе</button><button value="2" name="search" type="submit">Поиск по кричеру</button></td>
 			<tr><td><?php echo "Entry НПС"; ?>:</td><td><input name="creature_id" type="text" value="<?php echo $creature_id; ?>"> <button value="1" name="searchnpc" type="submit">Поиск в базе</button> <?php echo "<a href=\"http://ru.wowhead.com/?npc=$creature_id#abilities\" target=\"_blank\">$name</a>";?></td>
 			<tr><td><?php echo "Фаза события"; ?>:</td><td><input name="event_inverse_phase_mask" type="text" value="<?php echo $event_inverse_phase_mask; ?>"></td>
 			<tr><td><?php echo "Шанс срабатывания"; ?>:</td><td><input name="event_chance" type="text" value="<?php echo $event_chance; ?>"> %</td>
