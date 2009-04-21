@@ -11,7 +11,7 @@ $user			= 'root';
 $password		= '';
 $database		= ''; // your database
 $ai_text_loc	= '8'; // locale. Default: 8 (Russian locale)
-$version		= '0.1.9'; // script version
+$version		= '0.2.0'; // script version
 
 include_once ("DbSimple/Generic.php");
 $dDB = DbSimple_Generic::connect('mysql://'.$user.':'.$password.'@'.$host.'/'.$database);
@@ -69,101 +69,93 @@ if ($action3_param3 == '') $action3_param3 = '0';
 // заполняем данные, если используется поиск
 if ($searchnpc==1||$search==2||$search==3||$search==4)
 {
-	if ($search==2)
-	$id = $dDB-> selectCell("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
-	if ($searchnpc==1||$search==2||$search==3||$search==4)
-	{
-		if ($searchnpc==1)
-		$creature_id = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$creature_id."'");
-		$scid = $dDB-> selectCol("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
-		$count=count($scid);
-		if ($searchnpc==1)
-		$id = $scid[0];
-		if ($id==''||$search==4)
-		{
-			$id							= '';
-			$event_param1 				= 0;
-			$event_inverse_phase_mask 	= 0;
-			$event_chance				= 100;
-			$event_flags				= 0;
-			$event_type					= 0;
-			$event_param1				= 0;
-			$event_param2				= 0;
-			$event_param3				= 0;
-			$event_param4				= 0;
-			$action1_type				= 0;
-			$action1_param1				= 0;
-			$action1_param2				= 0;
-			$action1_param3				= 0;
-			$action2_type				= 0;
-			$action2_param1				= 0;
-			$action2_param2				= 0;
-			$action2_param3				= 0;
-			$action3_type				= 0;
-			$action3_param1				= 0;
-			$action3_param2				= 0;
-			$action3_param3				= 0;
-			$comment					= '';
-		}
-	}
+if ($search==2)
+$id = $dDB-> selectCell("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
+if ($searchnpc==1||$search==2||$search==3||$search==4)
+{
+if ($searchnpc==1)
+$creature_id = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$creature_id."'");
+$scid = $dDB-> selectCol("SELECT `id` FROM `creature_ai_scripts` WHERE `creature_id` = ".$creature_id."");
+$count=count($scid);
+if ($searchnpc==1)
+$id = $scid[0];
+if ($id==''||$search==4)
+{
+$id							= '';
+$event_param1 				= 0;
+$event_inverse_phase_mask 	= 0;
+$event_chance				= 100;
+$event_flags				= 0;
+$event_type					= 0;
+$event_param1				= 0;
+$event_param2				= 0;
+$event_param3				= 0;
+$event_param4				= 0;
+$action1_type				= 0;
+$action1_param1				= 0;
+$action1_param2				= 0;
+$action1_param3				= 0;
+$action2_type				= 0;
+$action2_param1				= 0;
+$action2_param2				= 0;
+$action2_param3				= 0;
+$action3_type				= 0;
+$action3_param1				= 0;
+$action3_param2				= 0;
+$action3_param3				= 0;
+$comment					= '';
+}
+}
 }
 if ($search==1 || ($search==2 && $id!='') || ($searchnpc==1 && $id !='') || $search==3)
 {
-	$script 					= $dDB-> selectRow("SELECT * FROM `creature_ai_scripts` WHERE `id` = ".$id."");
-	$creature_id 				= $script[creature_id];
-	$event_param1 				= $script[event_param1];
-	$event_inverse_phase_mask 	= $script[event_inverse_phase_mask];
-	$event_chance				= $script[event_chance];
-	$event_flags				= $script[event_flags];
-	$event_type					= $script[event_type];
-	$event_param1				= $script[event_param1];
-	$event_param2				= $script[event_param2];
-	$event_param3				= $script[event_param3];
-	$event_param4				= $script[event_param4];
-	$action1_type				= $script[action1_type];
-	$action1_param1				= $script[action1_param1];
-	$action1_param2				= $script[action1_param2];
-	$action1_param3				= $script[action1_param3];
-	$action2_type				= $script[action2_type];
-	$action2_param1				= $script[action2_param1];
-	$action2_param2				= $script[action2_param2];
-	$action2_param3				= $script[action2_param3];
-	$action3_type				= $script[action3_type];
-	$action3_param1				= $script[action3_param1];
-	$action3_param2				= $script[action3_param2];
-	$action3_param3				= $script[action3_param3];
-	$comment					= $script[comment];
+$script 					= $dDB-> selectRow("SELECT * FROM `creature_ai_scripts` WHERE `id` = ".$id."");
+$creature_id 				= $script[creature_id];
+$event_param1 				= $script[event_param1];
+$event_inverse_phase_mask 	= $script[event_inverse_phase_mask];
+$event_chance				= $script[event_chance];
+$event_flags				= $script[event_flags];
+$event_type					= $script[event_type];
+$event_param1				= $script[event_param1];
+$event_param2				= $script[event_param2];
+$event_param3				= $script[event_param3];
+$event_param4				= $script[event_param4];
+$action1_type				= $script[action1_type];
+$action1_param1				= $script[action1_param1];
+$action1_param2				= $script[action1_param2];
+$action1_param3				= $script[action1_param3];
+$action2_type				= $script[action2_type];
+$action2_param1				= $script[action2_param1];
+$action2_param2				= $script[action2_param2];
+$action2_param3				= $script[action2_param3];
+$action3_type				= $script[action3_type];
+$action3_param1				= $script[action3_param1];
+$action3_param2				= $script[action3_param2];
+$action3_param3				= $script[action3_param3];
+$comment					= $script[comment];
 }
 // Поиск
 // Поиск NPC
-if ($searchnpc==2)
+function crName($entry)
 {
-	$event_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$event_param1."'");
+global $dDB;
+return $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry`=".$entry."");
 }
-if ($searchnpc==3)
+function searchNpc($x)
 {
-	$action1_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$action1_param1."'");
-}
-if ($searchnpc==4)
-{
-	$action2_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$action2_param1."'");
-}
-if ($searchnpc==5)
-{
-	$action3_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_creature` WHERE `name_loc8`='".$action3_param1."'");
+global $dDB;
+return $npc = $dDB-> select("SELECT `entry`,`name_loc8` FROM `locales_creature` WHERE `name_loc8` LIKE '%".$x."%'");
 }
 // Поиск квестов
-if ($searchq==1)
+function searchQuest($quest)
 {
-	$action1_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_quest` WHERE `Title_loc8`='".$action1_param1."'");
+global $dDB;
+return $quest = $dDB-> select("SELECT `entry`,`Title_loc8` FROM `locales_quest` WHERE `Title_loc8` LIKE '%".$quest."%'");
 }
-if ($searchq==2)
+function questTitle($questt)
 {
-$action2_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_quest` WHERE `Title_loc8`='".$action2_param1."'");
-}
-if ($searchq==3)
-{
-	$action3_param1 = $dDB-> selectCell("SELECT `entry` FROM `locales_quest` WHERE `Title_loc8`='".$action3_param1."'");
+global $dDB;
+return $questt=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$questt."");
 }
 $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$creature_id."");
 ?>
@@ -187,17 +179,35 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 		else
 		{
 ?>
-			<tr><td><?php echo "Номер скрипта"; ?>:</td><td><input name="id" type="text" value="<?php echo $id; ?>"><br><button value="1" name="search" type="submit">Поиск в базе</button><button value="2" name="search" type="submit">Поиск по entry НПС</button></td> <?php }?>
-			<tr><td><?php echo "Entry НПС"; ?>:</td><td><input name="creature_id" type="text" value="<?php echo $creature_id; ?>"> <button value="1" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php echo "</br><a href=\"http://ru.wowhead.com/?npc=$creature_id#abilities\" target=\"_blank\">$name</a>";?></td>
-			<tr><td><?php echo "Фаза события"; ?>:</td><td><input name="event_inverse_phase_mask" type="text" value="<?php echo $event_inverse_phase_mask; ?>"></td>
-			<tr><td><?php echo "Шанс срабатывания"; ?>:</td><td><input name="event_chance" type="text" value="<?php echo $event_chance; ?>"> %</td>
-			<tr><td><?php echo "Повторяемость"; ?>:</td>
+			<tr><td>Номер скрипта:</td><td><input name="id" type="text" value="<?php echo $id; ?>"><br><button value="1" name="search" type="submit">Поиск в базе</button><button value="2" name="search" type="submit">Поиск по entry НПС</button></td> <?php }?>
+<?php
+if ($searchnpc==8&&(count(searchNpc($creature_id))>0))
+{
+		$npc=searchNpc($creature_id);
+		$count=count($npc);
+		echo "<tr><td>Entry НПС:</td><td><select name=\"creature_id\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <button value=\"2\" name=\"search\" type=\"submit\">Выбрать...</button></td>";
+}
+else
+{
+?>
+			<tr><td>Entry НПС:</td><td><input name="creature_id" type="text" value="<?php echo $creature_id; ?>"> <button value="8" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php echo "</br><a href=\"http://ru.wowhead.com/?npc=$creature_id#abilities\" target=\"_blank\">$name</a>";?></td>
+<? }?>
+			<tr><td>Фаза события:</td><td><input name="event_inverse_phase_mask" type="text" value="<?php echo $event_inverse_phase_mask; ?>"></td>
+			<tr><td>Шанс срабатывания:</td><td><input name="event_chance" type="text" value="<?php echo $event_chance; ?>"> %</td>
+			<tr><td>Повторяемость:</td>
 				<td><input type="checkbox" name="event_flags1" value="1" <?php if ($event_flags&1) {?>checked<?php }?>>Повторяемый
 				<input type="checkbox" name="event_flags4" value="128" <?php if ($event_flags&128) {?>checked<?php }?>>Debug<Br>
 				<input type="checkbox" name="event_flags2" value="2" <?php if ($event_flags&2) {?>checked<?php }?>>В Normal-mod
 				<input type="checkbox" name="event_flags3" value="4" <?php if ($event_flags&4) {?>checked<?php }?>>В Heroic-mod</td>
 			<?php $event_flags = $event_flags1+$event_flags2+$event_flags3+$event_flags4; ?>
-			<tr><td><?php echo "Тип события"; ?>:</td><td>
+			<tr><td>Тип события:</td><td>
 			<form method="post">
 			<select name="event_type">
 				<option value="0" <?php if ($event_type == 0) {?> selected <?php }?>>0_По таймеру в бою</option>
@@ -222,28 +232,28 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				<option value="22" <?php if ($event_type == 22) {?> selected <?php }?>>22_При получении эмоции</option>
 			</select> <input type="submit"value="Дальше..."></td>
 			<?php if ($event_type == 0) {?>
-			<tr><td><?php echo "Min время до срабатывания"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до срабатывания"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Min время до срабатывания:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
+			<tr><td>Max время до срабатывания:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 1) {?>
-			<tr><td><?php echo "Min время до срабатывания"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до срабатывания"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Min время до срабатывания:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
+			<tr><td>Max время до срабатывания:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 2) {?>
-			<tr><td><?php echo "Max значение HP"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
-			<tr><td><?php echo "Min значение HP"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Max значение HP:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
+			<tr><td>Min значение HP:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 3) {?>
-			<tr><td><?php echo "Max значение MP"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
-			<tr><td><?php echo "Min значение MP"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Max значение MP:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
+			<tr><td>Min значение MP:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 4) {?>
 			<tr><td>!!!</td><td>Дополнительные параметры не используются</td><tr>
@@ -252,8 +262,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$event_param3 = 0;
 					$event_param4 = 0;}?>
 			<?php if ($event_type == 5) {?>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 6) {?>
 			<tr><td>!!!</td><td>Дополнительные параметры не используются</td><tr>
@@ -268,23 +278,23 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$event_param3 = 0;
 					$event_param4 = 0;}?>
 			<?php if ($event_type == 8) {?>
-			<tr><td><?php echo "SpellID (если по школе, оставьте 0)"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <?php $spell=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$event_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$event_param1\" target=\"_blank\">$event_param1 $spell[spellname_loc8] $spell[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Spell School (если по SpellID, установите -1)"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>SpellID (если по школе, оставьте 0):</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <?php $spell=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$event_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$event_param1\" target=\"_blank\">$event_param1 $spell[spellname_loc8] $spell[rank_loc0]</a>";?></td>
+			<tr><td>Spell School (если по SpellID, установите -1):</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 9) {?>
-			<tr><td><?php echo "Минимальная дистанция до цели"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
-			<tr><td><?php echo "Максимальная дистанция до цели"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Минимальная дистанция до цели:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
+			<tr><td>Максимальная дистанция до цели:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 10) {?>
-			<tr><td><?php echo "Фракция цели"; ?>:</td><td><input type="radio" name="event_param1" value="0" <?php if ($event_param1==0) echo "checked";?>> Враждебная<Br>
+			<tr><td>Фракция цели</td><td><input type="radio" name="event_param1" value="0" <?php if ($event_param1==0) echo "checked";?>> Враждебная<Br>
    <input type="radio" name="event_param1" value="1"<?php if ($event_param1==1) echo "checked";?>> Дружественная<Br></td></td>
-			<tr><td><?php echo "Максимальная дистанция до цели"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Максимальная дистанция до цели:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 11) {?>
 			<tr><td>!!!</td><td>Дополнительные параметры не используются</td><tr>
@@ -293,37 +303,55 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$event_param3 = 0;
 					$event_param4 = 0;}?>
 			<?php if ($event_type == 12) {?>
-			<tr><td><?php echo "Max значение HP"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
-			<tr><td><?php echo "Min значение HP"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Max значение HP:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
+			<tr><td>Min значение HP:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> %</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 13) {?>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 14) {?>
-			<tr><td><?php echo "Дефицит HP друж. цели"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
-			<tr><td><?php echo "Радиус действия"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Дефицит HP друж. цели:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> %</td>
+			<tr><td>Радиус действия:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 15) {?>
-			<tr><td><?php echo "Тип диспелла"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
-			<tr><td><?php echo "Радиус"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>Тип диспелла:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
+			<tr><td>Радиус:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 16) {?>
-			<tr><td><?php echo "SpellID, дающий ауру"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <?php $spell=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$event_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$event_param1\" target=\"_blank\">$event_param1 $spell[spellname_loc8] $spell[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Радиус"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
+			<tr><td>SpellID, дающий ауру:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <?php $spell=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$event_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$event_param1\" target=\"_blank\">$event_param1 $spell[spellname_loc8] $spell[rank_loc0]</a>";?></td>
+			<tr><td>Радиус:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"></td>
+			<tr><td>Min время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 17) {?>
-			<tr><td><?php echo "creature_id"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <button value="2" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$event_param1.""); echo "</br><a href=\"http://ru.wowhead.com/?npc=$event_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Min время до повтора"; ?>:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
-			<tr><td><?php echo "Max время до повтора"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
+<?php
+if ($searchnpc==2&&(count(searchNpc($event_param1))>0))
+{
+		$npc=searchNpc($event_param1);
+		$count=count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"event_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+else
+{
+?>
+			<tr><td>creature_id:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"> <button value="2" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php echo "</br><a href=\"http://ru.wowhead.com/?npc=$event_param1\" target=\"_blank\">".crName($event_param1)."</a>";?></td>
+<?php } ?>
+			<tr><td>Min время до повтора:</td><td><input name="event_param2" type="text" value="<?php echo $event_param2; ?>"> милисекунд</td>
+			<tr><td>Max время до повтора:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($event_type == 21) {?>
 			<tr><td>!!!</td><td>Дополнительные параметры не используются</td><tr>
@@ -332,8 +360,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$event_param3 = 0;
 					$event_param4 = 0;}?>
 			<?php if ($event_type == 22) {?>
-			<tr><td><?php echo "ID эмоции"; ?>:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
-			<tr><td><?php echo "Условие"; ?>:</td><td><select name="event_param2">
+			<tr><td>ID эмоции:</td><td><input name="event_param1" type="text" value="<?php echo $event_param1; ?>"></td>
+			<tr><td>Условие:</td><td><select name="event_param2">
 				<option value="0" <?php if ($event_param2 == 0) {?> selected <?php }?>>0_Нет условия</option>
 				<option value="1" <?php if ($event_param2 == 1) {?> selected <?php }?>>1_Наличие ауры от спелла</option>
 				<option value="2" <?php if ($event_param2 == 2) {?> selected <?php }?>>2_Наличие предмета</option>
@@ -345,10 +373,10 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				<option value="8" <?php if ($event_param2 == 8) {?> selected <?php }?>>8_Выполнен квест</option>
 				<option value="9" <?php if ($event_param2 == 9) {?> selected <?php }?>>9_Взят квест</option>
 				<option value="12" <?php if ($event_param2 == 12) {?> selected <?php }?>>12_Событие</option></select></td>
-			<tr><td><?php echo "Парметр_1 условия"; ?>:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"></td>
-			<tr><td><?php echo "Парметр_2 условия"; ?>:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"></td>
+			<tr><td>Парметр_1 условия:</td><td><input name="event_param3" type="text" value="<?php echo $event_param3; ?>"></td>
+			<tr><td>Парметр_2 условия:</td><td><input name="event_param4" type="text" value="<?php echo $event_param4; ?>"></td>
 			<?php }?>
-			<tr><td><?php echo "Тип действия 1"; ?>:</td><td>
+			<tr><td>Тип действия 1:</td><td>
 			<select name="action1_type">
 				<option value="0" <?php if ($action1_type == 0) {?> selected <?php }?>>0_Ничего</option>
 				<option value="1" <?php if ($action1_type == 1) {?> selected <?php }?>>1_Случайный текст</option>
@@ -388,39 +416,57 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				<option value="38" <?php if ($action1_type == 38) {?> selected <?php }?>>38_Ввести всех игроков инста в бой</option>
 			</select> <input type="submit"value="Дальше..."></td>
 			<?php if ($action1_type == 1) {?>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param1.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param2.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param3.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param1.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param2.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action1_param3.""); echo $text;?></td>
 			<?php }?>
 			<?php if ($action1_type == 2) {?>
-			<tr><td><?php echo "FactionId из Faction.dbc. 0 для возврата оригинальной фракции"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>FactionId из Faction.dbc. 0 для возврата оригинальной фракции:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 3) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "modelID, если первый параметр = 0"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+	echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+	for ($i=0; $i<$count; $i++)
+	{
+		$npcn=$npc[$i][name_loc8];
+		$npce=$npc[$i][entry];
+		echo "<option value=\"$npce\"></br>$npcn</option>";
+	}
+	echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">".crName($action1_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>modelID, если первый параметр = 0:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 4) {?>
-			<tr><td><?php echo "SoundID из DBC"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>SoundID из DBC:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 5) {?>
-			<tr><td><?php echo "EmoteID из DBC"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>EmoteID из DBC:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 9) {?>
-			<tr><td><?php echo "SoundID_1 из DBC"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "SoundID_2 из DBC"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
-			<tr><td><?php echo "SoundID_3 из DBC"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
+			<tr><td>SoundID_1 из DBC:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>SoundID_2 из DBC:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>SoundID_3 из DBC:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action1_type == 10) {?>
-			<tr><td><?php echo "EmoteID_1 из DBC"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "EmoteID_2 из DBC"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
-			<tr><td><?php echo "EmoteID_3 из DBC"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
+			<tr><td>EmoteID_1 из DBC:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>EmoteID_2 из DBC:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>EmoteID_3 из DBC:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action1_type == 11) {?>
-			<tr><td><?php echo "SpellID"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param1\" target=\"_blank\">$action1_param1 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>SpellID:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param1\" target=\"_blank\">$action1_param1 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -430,7 +476,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action1_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action1_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Флаг каста"; ?>:</td>
+			<tr><td>Флаг каста:</td>
 				<td><input type="checkbox" name="cast1_flags1" value="1" <?php if ($action1_param3&1) {?>checked<?php }?>>Прерывает любой другой каст<br>
 				<input type="checkbox" name="cast1_flags2" value="2" <?php if ($action1_param3&2) {?>checked<?php }?>>Инстант каст без требования маны/реагентов<br>
 				<input type="checkbox" name="cast1_flags3" value="4" <?php if ($action1_param3&4) {?>checked<?php }?>>Каст если цель далеко или нет маны<br>
@@ -440,8 +486,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 			<?php $action1_param3 = $cast1_flags1+$cast1_flags2+$cast1_flags3+$cast1_flags4+$cast1_flags5+$cast1_flags6; ?>
 			<?php }?>
 			<?php if ($action1_type == 12) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">".crName($action1_param1)."</a>";?></td>
+<?php } ?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -451,11 +515,11 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action1_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action1_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Длительность призыва"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"> милисекунд</td>
+			<tr><td>Длительность призыва:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($action1_type == 13) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> %</td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> %</td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -467,12 +531,30 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 14) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> %</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> %</td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 15) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 $quest</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchq==1&&(count(searchQuest($action1_param1))>0))
+{
+	$quest = searchQuest($action1_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 ".questTitle($action1_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -484,9 +566,27 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 16) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">"; echo crName($action1_param1);?></a></td>
+<?php }?>
 			<tr><td><?php echo "SpellID для каста на НПС из первого параметра"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param2\" target=\"_blank\">$action1_param2 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param3">
 					<option value="0" <?php if ($action1_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -498,9 +598,9 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action1_type == 17) {?>
-			<tr><td><?php echo "Номер поля DATA"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Номер поля DATA:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param3">
 					<option value="0" <?php if ($action1_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -512,8 +612,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action1_type == 18) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -525,8 +625,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 19) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -538,21 +638,21 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 20) {?>
-			<tr><td><?php echo "Начать или прекратить мили-атаку"; ?>:</td><td><input type="radio" name="action1_param1" value="0" <?php if ($action1_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
+			<tr><td>Начать или прекратить мили-атаку:</td><td><input type="radio" name="action1_param1" value="0" <?php if ($action1_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
    <input type="radio" name="action1_param1" value="1"<?php if ($action1_param1==1) echo "checked";?>> Начать/продолжить мили-атаку<Br></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 21) {?>
-			<tr><td><?php echo "Начать или прекратить движение"; ?>:</td><td><input type="radio" name="action1_param1" value="0" <?php if ($action1_param1==0) echo "checked";?>> Прекратить движение<Br>
+			<tr><td>Начать или прекратить движение:</td><td><input type="radio" name="action1_param1" value="0" <?php if ($action1_param1==0) echo "checked";?>> Прекратить движение<Br>
    <input type="radio" name="action1_param1" value="1"<?php if ($action1_param1==1) echo "checked";?>> Начать/продолжить движение<Br></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 22) {?>
-			<tr><td><?php echo "Номер новой фазы"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Номер новой фазы:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 23) {?>
-			<tr><td><?php echo "Число, на которое увеличится номер фазы"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Число, на которое увеличится номер фазы:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 24) {?>
@@ -566,15 +666,51 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 26) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 $quest</a>";?></td>
+<?php
+if ($searchq==1&&(count(searchQuest($action1_param1))>0))
+{
+	$quest = searchQuest($action1_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 ".questTitle($action1_param1)."</a>";?></td>
+<?php }?>
 			<?php 	$action1_param2 = 0;
 					$action1_param3 = 0;}?>
 			<?php if ($action1_type == 27) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 $quest</a>";?></td>
-			<tr><td><?php echo "SpellID для симуляции каста"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param2\" target=\"_blank\">$action1_param2 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
+<?php
+if ($searchq==1&&(count(searchQuest($action1_param1))>0))
+{
+	$quest = searchQuest($action1_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="1" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action1_param1\" target=\"_blank\">$action1_param1 ".questTitle($action1_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>SpellID для эмуляции каста:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param2\" target=\"_blank\">$action1_param2 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 28) {?>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param1">
 					<option value="0" <?php if ($action1_param1 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param1 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -584,24 +720,42 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action1_param1 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action1_param1 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "SpellID, вызвавший ауру"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param2\" target=\"_blank\">$action1_param2 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
+			<tr><td>SpellID, вызвавший ауру:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"> <?php $spell1=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action1_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action1_param2\" target=\"_blank\">$action1_param2 $spell1[spellname_loc8] $spell1[rank_loc0]</a>";?></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 29) {?>
-			<tr><td><?php echo "На расстояние"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "По углом"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>На расстояние:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>По углом:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 30) {?>
-			<tr><td><?php echo "Фаза_1"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Фаза_2"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
-			<tr><td><?php echo "Фаза_3"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
+			<tr><td>Фаза_1:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Фаза_2:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>Фаза_3:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action1_type == 31) {?>
-			<tr><td><?php echo "Минимальный номер фазы"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Максимальный номер фазы"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>Min номер фазы:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Маx номер фазы:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 32) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">"; echo crName($action1_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -611,11 +765,29 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action1_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action1_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "id из creature_ai_summons"; ?>:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
+			<tr><td>id из creature_ai_summons:</td><td><input name="action1_param3" type="text" value="<?php echo $action1_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action1_type == 33) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">"; echo crName($action1_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -627,12 +799,12 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 34) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
+			<tr><td>Поле:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action1_param2" type="text" value="<?php echo $action1_param2; ?>"></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 35) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Поле:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action1_param2">
 					<option value="0" <?php if ($action1_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action1_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -644,8 +816,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 36) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action1_param1.""); echo "<a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Использовать"; ?>:</td><td><input type="radio" name="action1_param2" value="0" <?php if ($action1_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
+<?php
+if ($searchnpc==3&&(count(searchNpc($action1_param1))>0))
+{
+	$npc = searchNpc($action1_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action1_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action1_param1" type="text" value="<?php echo $action1_param1; ?>"> <button value="3" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action1_param1\" target=\"_blank\">"; echo crName($action1_param1);?></a></td>
+<?php }?>
+			<tr><td>Использовать:</td><td><input type="radio" name="action1_param2" value="0" <?php if ($action1_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
    <input type="radio" name="action1_param2" value="1"<?php if ($action1_param2==1) echo "checked";?>> modelid_H (для Орды)<Br></td>
 			<?php 	$action1_param3 = 0;}?>
 			<?php if ($action1_type == 37) {?>
@@ -660,7 +850,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action1_param3 = 0;}?>
 					
 <!-- Action 2 -->
-			<tr><td><?php echo "Тип действия 2"; ?>:</td><td>
+			<tr><td>Тип действия 2:</td><td>
 			<select name="action2_type">
 				<option value="0" <?php if ($action2_type == 0) {?> selected <?php }?>>0_Ничего</option>
 				<option value="1" <?php if ($action2_type == 1) {?> selected <?php }?>>1_Случайный текст</option>
@@ -700,39 +890,57 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				<option value="38" <?php if ($action2_type == 38) {?> selected <?php }?>>38_Ввести всех игроков инста в бой</option>
 			</select> <input type="submit"value="Дальше..."></td>
 			<?php if ($action2_type == 1) {?>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param2.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param2.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param3.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param2.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param2.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action2_param3.""); echo $text;?></td>
 			<?php }?>
 			<?php if ($action2_type == 2) {?>
-			<tr><td><?php echo "FactionId из Faction.dbc. 0 для возврата оригинальной фракции"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>FactionId из Faction.dbc. 0 для возврата оригинальной фракции:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 3) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "modelID, если первый параметр = 0"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<?php }?>
+			<tr><td>modelID, если первый параметр = 0:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 4) {?>
-			<tr><td><?php echo "SoundID из DBC"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>SoundID из DBC:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 5) {?>
-			<tr><td><?php echo "EmoteID из DBC"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>EmoteID из DBC:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 9) {?>
-			<tr><td><?php echo "SoundID_1 из DBC"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "SoundID_2 из DBC"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
-			<tr><td><?php echo "SoundID_3 из DBC"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
+			<tr><td>SoundID_1 из DBC:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>SoundID_2 из DBC:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>SoundID_3 из DBC:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action2_type == 10) {?>
-			<tr><td><?php echo "EmoteID_1 из DBC"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "EmoteID_2 из DBC"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
-			<tr><td><?php echo "EmoteID_3 из DBC"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
+			<tr><td>EmoteID_1 из DBC:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>EmoteID_2 из DBC:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>EmoteID_3 из DBC:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action2_type == 11) {?>
-			<tr><td><?php echo "SpellID"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param1\" target=\"_blank\">$action2_param1 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>SpellID:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param1\" target=\"_blank\">$action2_param1 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -742,7 +950,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action2_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action2_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Флаг каста"; ?>:</td>
+			<tr><td>Флаг каста:</td>
 				<td><input type="checkbox" name="cast2_flags1" value="1" <?php if ($action2_param3&1) {?>checked<?php }?>>Прерывает любой другой каст<br>
 				<input type="checkbox" name="cast2_flags2" value="2" <?php if ($action2_param3&2) {?>checked<?php }?>>Инстант каст без требования маны/реагентов<br>
 				<input type="checkbox" name="cast2_flags3" value="4" <?php if ($action2_param3&4) {?>checked<?php }?>>Каст если цель далеко или нет маны<br>
@@ -752,8 +960,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 			<?php $action2_param3 = $cast2_flags1+$cast2_flags2+$cast2_flags3+$cast2_flags4+$cast2_flags5+$cast2_flags6; ?>
 			<?php }?>
 			<?php if ($action2_type == 12) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -763,11 +989,11 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action2_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action2_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Длительность призыва"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"> милисекунд</td>
+			<tr><td>Длительность призыва:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($action2_type == 13) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> %</td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> %</td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -779,12 +1005,30 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 14) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> %</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> %</td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 15) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 $quest</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchq==2&&(count(searchQuest($action2_param1))>0))
+{
+	$quest = searchQuest($action2_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 ".questTitle($action2_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -796,9 +1040,27 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 16) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<?php }?>
 			<tr><td><?php echo "SpellID для каста на НПС из первого параметра"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param2\" target=\"_blank\">$action2_param2 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param3">
 					<option value="0" <?php if ($action2_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -810,9 +1072,9 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action2_type == 17) {?>
-			<tr><td><?php echo "Номер поля DATA"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Номер поля DATA:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param3">
 					<option value="0" <?php if ($action2_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -824,8 +1086,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action2_type == 18) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -837,8 +1099,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 19) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -850,21 +1112,21 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 20) {?>
-			<tr><td><?php echo "Начать или прекратить мили-атаку"; ?>:</td><td><input type="radio" name="action2_param1" value="0" <?php if ($action2_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
+			<tr><td>Начать или прекратить мили-атаку:</td><td><input type="radio" name="action2_param1" value="0" <?php if ($action2_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
    <input type="radio" name="action2_param1" value="1"<?php if ($action2_param1==1) echo "checked";?>> Начать/продолжить мили-атаку<Br></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 21) {?>
-			<tr><td><?php echo "Начать или прекратить движение"; ?>:</td><td><input type="radio" name="action2_param1" value="0" <?php if ($action2_param1==0) echo "checked";?>> Прекратить движение<Br>
+			<tr><td>Начать или прекратить движение:</td><td><input type="radio" name="action2_param1" value="0" <?php if ($action2_param1==0) echo "checked";?>> Прекратить движение<Br>
    <input type="radio" name="action2_param1" value="1"<?php if ($action2_param1==1) echo "checked";?>> Начать/продолжить движение<Br></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 22) {?>
-			<tr><td><?php echo "Номер новой фазы"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Номер новой фазы:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 23) {?>
-			<tr><td><?php echo "Число, на которое увеличится номер фазы"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Число, на которое увеличится номер фазы:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 24) {?>
@@ -878,15 +1140,51 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 26) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 $quest</a>";?></td>
+<?php
+if ($searchq==2&&(count(searchQuest($action2_param1))>0))
+{
+	$quest = searchQuest($action2_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 ".questTitle($action2_param1)."</a>";?></td>
+<?php }?>
 			<?php 	$action2_param2 = 0;
 					$action2_param3 = 0;}?>
 			<?php if ($action2_type == 27) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по назвнию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 $quest</a>";?></td>
-			<tr><td><?php echo "SpellID для симуляции каста"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param2\" target=\"_blank\">$action2_param2 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
+<?php
+if ($searchq==2&&(count(searchQuest($action2_param1))>0))
+{
+	$quest = searchQuest($action2_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="2" name="searchq" type="submit">Поиск по назвнию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action2_param1\" target=\"_blank\">$action2_param1 ".questTitle($action2_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>SpellID для эмуляции каста:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param2\" target=\"_blank\">$action2_param2 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 28) {?>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param1">
 					<option value="0" <?php if ($action2_param1 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param1 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -896,24 +1194,42 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action2_param1 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action2_param1 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "SpellID, вызвавший ауру"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param2\" target=\"_blank\">$action2_param2 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
+			<tr><td>SpellID, вызвавший ауру:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"> <?php $spell2=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action2_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action2_param2\" target=\"_blank\">$action2_param2 $spell2[spellname_loc8] $spell2[rank_loc0]</a>";?></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 29) {?>
-			<tr><td><?php echo "На расстояние"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "По углом"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>На расстояние:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>По углом:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 30) {?>
-			<tr><td><?php echo "Фаза_1"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Фаза_2"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
-			<tr><td><?php echo "Фаза_3"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
+			<tr><td>Фаза_1:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Фаза_2:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>Фаза_3:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action2_type == 31) {?>
-			<tr><td><?php echo "Минимальный номер фазы"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Максимальный номер фазы"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>Min номер фазы:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Маx номер фазы:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 32) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -923,11 +1239,29 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action2_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action2_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "id из creature_ai_summons"; ?>:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
+			<tr><td>id из creature_ai_summons:</td><td><input name="action2_param3" type="text" value="<?php echo $action2_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action2_type == 33) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<? }?>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -939,12 +1273,12 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 34) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
+			<tr><td>Поле:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action2_param2" type="text" value="<?php echo $action2_param2; ?>"></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 35) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Поле:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action2_param2">
 					<option value="0" <?php if ($action2_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action2_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -956,8 +1290,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 36) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action2_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Использовать"; ?>:</td><td><input type="radio" name="action2_param2" value="0" <?php if ($action2_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
+<?php
+if ($searchnpc==4&&(count(searchNpc($action2_param1))>0))
+{
+	$npc = searchNpc($action2_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action2_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action2_param1" type="text" value="<?php echo $action2_param1; ?>"> <button value="4" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action2_param1\" target=\"_blank\">"; echo crName($action2_param1);?></a></td>
+<?php }?> 
+			<tr><td>Использовать:</td><td><input type="radio" name="action2_param2" value="0" <?php if ($action2_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
    <input type="radio" name="action2_param2" value="1"<?php if ($action2_param2==1) echo "checked";?>> modelid_H (для Орды)<Br></td></td>
 			<?php 	$action2_param3 = 0;}?>
 			<?php if ($action2_type == 37) {?>
@@ -972,7 +1324,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action2_param3 = 0;}?>
 					
 <!-- Action 3 -->
-			<tr><td><?php echo "Тип действия 3"; ?>:</td><td>
+			<tr><td>Тип действия 3:</td><td>
 			<select name="action3_type">
 				<option value="0" <?php if ($action3_type == 0) {?> selected <?php }?>>0_Ничего</option>
 				<option value="1" <?php if ($action3_type == 1) {?> selected <?php }?>>1_Случайный текст</option>
@@ -1013,39 +1365,57 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 			</select> <input type="submit"value="Дальше..."></td>
 			</form>
 			<?php if ($action3_type == 1) {?>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param1.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param2.""); echo $text;?></td>
-			<tr><td><?php echo "entry из creature_ai_texts"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param3.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param1.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param2.""); echo $text;?></td>
+			<tr><td>entry из creature_ai_texts:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"> <?php $text = $dDB-> selectCell("SELECT `content_loc".$ai_text_loc."` FROM `creature_ai_texts` WHERE `entry` = ".$action3_param3.""); echo $text;?></td>
 			<?php }?>
 			<?php if ($action3_type == 2) {?>
-			<tr><td><?php echo "FactionId из Faction.dbc. 0 для возврата оригинальной фракции"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>FactionId из Faction.dbc. 0 для возврата оригинальной фракции:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 3) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "modelID, если первый параметр = 0"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
+			<tr><td>modelID, если первый параметр = 0:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 4) {?>
-			<tr><td><?php echo "SoundID из DBC"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>SoundID из DBC:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 5) {?>
-			<tr><td><?php echo "EmoteID из DBC"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>EmoteID из DBC:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 9) {?>
-			<tr><td><?php echo "SoundID_1 из DBC"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "SoundID_2 из DBC"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
-			<tr><td><?php echo "SoundID_3 из DBC"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
+			<tr><td>SoundID_1 из DBC:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>SoundID_2 из DBC:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>SoundID_3 из DBC:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action3_type == 10) {?>
-			<tr><td><?php echo "EmoteID_1 из DBC"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "EmoteID_2 из DBC"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
-			<tr><td><?php echo "EmoteID_3 из DBC"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
+			<tr><td>EmoteID_1 из DBC:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>EmoteID_2 из DBC:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>EmoteID_3 из DBC:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action3_type == 11) {?>
-			<tr><td><?php echo "SpellID"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param1\" target=\"_blank\">$action3_param1 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>SpellID:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param1.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param1\" target=\"_blank\">$action3_param1 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1055,7 +1425,7 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action3_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action3_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Флаг каста"; ?>:</td>
+			<tr><td>Флаг каста:</td>
 				<td><input type="checkbox" name="cast3_flags1" value="1" <?php if ($action3_param3&1) {?>checked<?php }?>>Прерывает любой другой каст<br>
 				<input type="checkbox" name="cast3_flags2" value="2" <?php if ($action3_param3&2) {?>checked<?php }?>>Инстант каст без требования маны/реагентов<br>
 				<input type="checkbox" name="cast3_flags3" value="4" <?php if ($action3_param3&4) {?>checked<?php }?>>Каст если цель далеко или нет маны<br>
@@ -1065,8 +1435,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 			<?php $action3_param3 = $cast3_flags1+$cast3_flags2+$cast3_flags3+$cast3_flags4+$cast3_flags5+$cast3_flags6; ?>
 			<?php }?>
 			<?php if ($action3_type == 12) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1076,11 +1464,11 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action3_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action3_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "Длительность призыва"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"> милисекунд</td>
+			<tr><td>Длительность призыва:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"> милисекунд</td>
 			<?php }?>
 			<?php if ($action3_type == 13) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> %</td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> %</td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1092,12 +1480,30 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 14) {?>
-			<tr><td><?php echo "Процент увеличения (от -100 до +100)"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> %</td>
+			<tr><td>Процент увеличения (от -100 до +100):</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> %</td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 15) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 $quest</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchq==3&&(count(searchQuest($action3_param1))>0))
+{
+	$quest = searchQuest($action3_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 ".questTitle($action3_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1109,9 +1515,27 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 16) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
 			<tr><td><?php echo "SpellID для каста на НПС из первого параметра"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param2\" target=\"_blank\">$action3_param2 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param3">
 					<option value="0" <?php if ($action3_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1123,9 +1547,9 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action3_type == 17) {?>
-			<tr><td><?php echo "Номер поля DATA"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Номер поля DATA:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param3">
 					<option value="0" <?php if ($action3_param3 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param3 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1137,8 +1561,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php }?>
 			<?php if ($action3_type == 18) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1150,8 +1574,8 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 19) {?>
-			<tr><td><?php echo "Флаг"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Флаг:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1163,21 +1587,21 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 20) {?>
-			<tr><td><?php echo "Начать или прекратить мили-атаку"; ?>:</td><td><input type="radio" name="action3_param1" value="0" <?php if ($action3_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
+			<tr><td>Начать или прекратить мили-атаку:</td><td><input type="radio" name="action3_param1" value="0" <?php if ($action3_param1==0) echo "checked";?>> Прекратить мили-атаку<Br>
    <input type="radio" name="action3_param1" value="1"<?php if ($action3_param1==1) echo "checked";?>> Начать/продолжить мили-атаку<Br></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 21) {?>
-			<tr><td><?php echo "Начать или прекратить движение"; ?>:</td><td><input type="radio" name="action3_param1" value="0" <?php if ($action3_param1==0) echo "checked";?>> Прекратить движение<Br>
+			<tr><td>Начать или прекратить движение:</td><td><input type="radio" name="action3_param1" value="0" <?php if ($action3_param1==0) echo "checked";?>> Прекратить движение<Br>
    <input type="radio" name="action3_param1" value="1"<?php if ($action3_param1==1) echo "checked";?>> Начать/продолжить движение<Br></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 22) {?>
-			<tr><td><?php echo "Номер новой фазы"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Номер новой фазы:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 23) {?>
-			<tr><td><?php echo "Число, на которое увеличится номер фазы"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Число, на которое увеличится номер фазы:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 24) {?>
@@ -1191,15 +1615,51 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 26) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 $quest</a>";?></td>
+<?php 
+if ($searchq==3&&(count(searchQuest($action3_param1))>0))
+{
+	$quest = searchQuest($action3_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 ".questTitle($action3_param1)."</a>";?></td>
+<?php }?>
 			<?php 	$action3_param2 = 0;
 					$action3_param3 = 0;}?>
 			<?php if ($action3_type == 27) {?>
-			<tr><td><?php echo "entry из quest_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php $quest=$dDB-> selectCell("SELECT `Title_loc8` FROM `locales_quest` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 $quest</a>";?></td>
-			<tr><td><?php echo "SpellID для симуляции каста"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param2\" target=\"_blank\">$action3_param2 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
+<?php
+if ($searchq==3&&(count(searchQuest($action3_param1))>0))
+{
+	$quest = searchQuest($action3_param1);
+	$count = count($quest);
+		echo "<tr><td>entry из quest_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$qt=$quest[$i][Title_loc8];
+			$qe=$quest[$i][entry];
+			echo "<option value=\"$qe\"></br>$qt</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из quest_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="3" name="searchq" type="submit">Поиск по названию в базе</button> <?php echo "<br><a href=\"http://ru.wowhead.com/?quest=$action3_param1\" target=\"_blank\">$action3_param1 ".questTitle($action3_param1)."</a>";?></td>
+<?php }?>
+			<tr><td>SpellID для эмуляции каста:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param2\" target=\"_blank\">$action3_param2 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 28) {?>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param1">
 					<option value="0" <?php if ($action3_param1 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param1 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1209,24 +1669,42 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action3_param1 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action3_param1 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "SpellID, вызвавший ауру"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param2\" target=\"_blank\">$action3_param2 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
+			<tr><td>SpellID, вызвавший ауру:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"> <?php $spell3=$dDB-> selectRow("SELECT * FROM `easyeventai_spell` WHERE `SpellID` = ".$action3_param2.""); echo "<a href=\"http://ru.wowhead.com/?spell=$action3_param2\" target=\"_blank\">$action3_param2 $spell3[spellname_loc8] $spell3[rank_loc0]</a>";?></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 29) {?>
-			<tr><td><?php echo "На расстояние"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "По углом"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>На расстояние:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>По углом:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 30) {?>
-			<tr><td><?php echo "Фаза_1"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Фаза_2"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
-			<tr><td><?php echo "Фаза_3"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
+			<tr><td>Фаза_1:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Фаза_2:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>Фаза_3:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action3_type == 31) {?>
-			<tr><td><?php echo "Минимальный номер фазы"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Максимальный номер фазы"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>Min номер фазы:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Маx номер фазы:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 32) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель суммона"; ?>:</td>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель суммона:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1236,11 +1714,29 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 					<option value="5" <?php if ($action3_param2 == 5) {?> selected <?php }?>>Случайная, только не первая по аггро</option>
 					<?php if ($event_type == 4 || $event_type == 5 || $event_type == 6|| $event_type == 8 || $event_type == 10|| $event_type == 14) {?><option value="6" <?php if ($action3_param2 == 6) {?> selected <?php }?>>Тот, кто вызвал событие</option><?php }?>
 				</select></td>
-			<tr><td><?php echo "id из creature_ai_summons"; ?>:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
+			<tr><td>id из creature_ai_summons:</td><td><input name="action3_param3" type="text" value="<?php echo $action3_param3; ?>"></td>
 			<?php }?>
 			<?php if ($action3_type == 33) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1252,12 +1748,12 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 34) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Значение"; ?>:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
+			<tr><td>Поле:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Значение:</td><td><input name="action3_param2" type="text" value="<?php echo $action3_param2; ?>"></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 35) {?>
-			<tr><td><?php echo "Поле"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
-			<tr><td><?php echo "Цель"; ?>:</td>
+			<tr><td>Поле:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"></td>
+			<tr><td>Цель:</td>
 				<td><select name="action3_param2">
 					<option value="0" <?php if ($action3_param2 == 0) {?> selected <?php }?>>Сам НПС (Self)</option>
 					<option value="1" <?php if ($action3_param2 == 1) {?> selected <?php }?>>Текущая цель</option>
@@ -1269,8 +1765,26 @@ $name = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `ent
 				</select></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 36) {?>
-			<tr><td><?php echo "entry из creature_template"; ?>:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button> <?php $crname = $dDB-> selectCell("SELECT `name_loc8` FROM `locales_creature` WHERE `entry` = ".$action3_param1.""); echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">$crname</a>";?></td>
-			<tr><td><?php echo "Использовать"; ?>:</td><td><input type="radio" name="action3_param2" value="0" <?php if ($action3_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
+<?php
+if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
+{
+	$npc = searchNpc($action3_param1);
+	$count = count($npc);
+		echo "<tr><td>entry из creaure_template</td><td><select name=\"action3_param1\">";
+		for ($i=0; $i<$count; $i++)
+		{
+			$npcn=$npc[$i][name_loc8];
+			$npce=$npc[$i][entry];
+			echo "<option value=\"$npce\"></br>$npcn</option>";
+		}
+		echo "</select> <input type=\"submit\" value=\"Выбрать...\"></td>";
+}
+	else
+{
+?>
+			<tr><td>entry из creature_template:</td><td><input name="action3_param1" type="text" value="<?php echo $action3_param1; ?>"> <button value="5" name="searchnpc" type="submit">Поиск по имени в базе</button><?php echo "<br><a href=\"http://ru.wowhead.com/?npc=$action3_param1\" target=\"_blank\">"; echo crName($action3_param1);?></a></td>
+<?php }?>
+			<tr><td>Использовать:</td><td><input type="radio" name="action3_param2" value="0" <?php if ($action3_param2==0) echo "checked";?>> modelid_A (для Альянса)<Br>
    <input type="radio" name="action3_param2" value="1"<?php if ($action3_param2==1) echo "checked";?>> modelid_H (для Орды)<Br></td>
 			<?php 	$action3_param3 = 0;}?>
 			<?php if ($action3_type == 37) {?>
