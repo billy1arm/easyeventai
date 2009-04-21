@@ -12,6 +12,7 @@ $password		= '';
 $database		= ''; // your database
 $ai_text_loc	= '8'; // locale. Default: 8 (Russian locale)
 $version		= '0.2.0'; // script version
+$check			= '0'; // 0 - надеемся на собственную внимательность; 1 - заставляем проверять скрипт
 
 include_once ("DbSimple/Generic.php");
 $dDB = DbSimple_Generic::connect('mysql://'.$user.':'.$password.'@'.$host.'/'.$database);
@@ -1806,6 +1807,8 @@ if ($searchnpc==5&&(count(searchNpc($action3_param1))>0))
 <?php
 if($done != '')
 {
+	if ($check==1)
+	{
 	// проверка на ошибки
 	switch ($event_type)
 	{
@@ -1862,6 +1865,7 @@ if($done != '')
 				echo $error;
 				return;
 			}
+		}
 		}
 		
 	}
